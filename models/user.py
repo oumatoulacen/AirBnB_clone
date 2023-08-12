@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 ''' the user class module'''
+
 from models import storage
 from models.base_model import BaseModel
+'''modules to use'''
 
 
 class User(BaseModel):
