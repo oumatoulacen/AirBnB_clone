@@ -44,8 +44,8 @@ class FileStorage:
         from models.review import Review
 
         classes = {"BaseModel": BaseModel, "User": User, "Place\
-                ": Place, "City": City, "State": State, "Amenity\
-                ": Amenity, "Review": Review}
+": Place, "City": City, "State": State, "Amenity\
+": Amenity, "Review": Review}
         return classes
 
     def reload(self):

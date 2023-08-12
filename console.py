@@ -18,26 +18,26 @@ class HBNBCommand(cmd.Cmd):
         interpreted, but after the input prompt is generated and issued.
         """
         classes = ["User", "Place", "Amenity", "City\
-                ", "Review", "BaseModel", "State"]
+", "Review", "BaseModel", "State"]
         if line is not None and line != "":
             words = line.strip().split(".")
-            if len(words) == 2:
-                name = words[0]
-                cmnd = words[1]
+            if len(words) >= 2:
+                name = line.strip().split(".")[0]
+                cmnd = line.strip().split(".")[1]
                 if name in classes and cmnd is not None:
                     if cmnd == "all()":
                         line = f"all {name}"
                     elif cmnd == "count()":
                         line = f"count {name}"
-                    elif cmnd.split('(')[0] == 'show':
+                    elif cmnd.split('(')[0] == 'show' and cmnd[-1] == ")":
                         Id = cmnd.split('(')[1].split(')')[0]
                         Id = str(Id)
                         line = f"show {name} {id}"
-                    elif cmnd.split('(')[0] == "destroy":
+                    elif cmnd.split('(')[0] == "destroy" and cmnd[-1] == ")":
                         Id = cmnd.split('(')[1].split(')')[0]
                         Id = str(Id)
                         line = f"destroy {name} {Id}"
-                    elif cmnd.split('(')[0] == "update":
+                    elif cmnd.split('(')[0] == "update" and cmnd[-1] == ")":
                         inp = cmnd.split('(')[1].split(')')[0]
                         args = inp.split(",")
                         if len(args) == 0:
@@ -48,28 +48,16 @@ class HBNBCommand(cmd.Cmd):
                             line = f"update {name} {str(args[0]).strip()} \
 {str(args[1]).strip()}"
                         elif len(args) == 3:
-                            arg1, arg2, arg3 = args[0].strip(),
+                            arg1, arg2, arg3 = args[0].strip(),\
                             args[1].strip(), args[2].strip()
                             if len(arg1) >= 2:
-                                if arg1[0] == arg1[-1] == "'\
-                                        " or arg1[0] == arg1[-1] == '"':
                                     arg1 = arg1[1:-1]
-                                else:
-                                    arg1 = arg1.strip()
                             if len(arg2) >= 2:
-                                if arg2[0] == arg2[-1] == "'\
-                                        " or arg2[0] == arg2[-1] == '"':
+                                if arg2[0] == arg2[-1] == '"':
                                     arg2 = arg2[1:-1]
                                 else:
-                                    arg2 = arg2.strip()
-                            if len(arg3) >= 2:
-                                if arg3[0] == arg3[-1] == "'\
-                                        " or arg3[0] == arg3[-1] == '"':
-                                    arg3 = arg3[1:-1]
-                                else:
-                                    arg3 = arg3
+                                    arg2 = ""
                             line = f"update {str(name)} {arg1} {arg2} {arg3}"
-                            print(line)
         return line
 
     def do_count(self, name):
@@ -80,10 +68,10 @@ class HBNBCommand(cmd.Cmd):
             print(len(obj))
 
     def emptyline(self):
-
         """prevents default behavior of cmd to ignore running command on
         empty line plus enter
         """
+
         pass
 
     def do_EOF(self, line):
@@ -94,6 +82,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, line):
         '''Quit command to exit the program\n'''
+
         return True
 
     def do_help(self, arg):
