@@ -29,10 +29,10 @@ class HBNBCommand(cmd.Cmd):
                         line = f"all {name}"
                     elif cmnd == "count()":
                         line = f"count {name}"
-                    elif cmnd.split('(')[0] == 'show' and cmnd[-1] == ")":
+                    elif cmnd.split('(')[0] == "show" and cmnd[-1] == ")":
                         Id = cmnd.split('(')[1].split(')')[0]
                         Id = str(Id)
-                        line = f"show {name} {id}"
+                        line = f"show {name} {Id}"
                     elif cmnd.split('(')[0] == "destroy" and cmnd[-1] == ")":
                         Id = cmnd.split('(')[1].split(')')[0]
                         Id = str(Id)
@@ -105,11 +105,11 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, line):
         '''Prints the string representation of an instance based on
         the class name and id'''
+
         if not line or line == "":
             print("** class name missing **")
         else:
             class_name, class_id, line = super().parseline(line)
-
             if class_name not in storage.classes().keys():
                 print("** class doesn't exist **")
             elif not class_id:
