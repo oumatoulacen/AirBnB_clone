@@ -1,0 +1,69 @@
+#!/usr/bin/python3
+""" test console """
+
+import unittest
+from console import HBNBCommand
+import console
+from unittest.mock import patch
+from io import StringIO
+from models import storage
+import models
+
+
+class TestConsole(unittest.TestCase):
+    """ console test cases"""
+
+    def test_console_doc(self):
+        '''test docs of console module and HBNBcommand class'''
+
+        self.assertEqual(HBNBCommand.__doc__, '''hbnb class for the cmd''')
+        self.assertEqual(console.__doc__, '''console module contains the \
+entry point of the command interpreter''')
+
+    def test_empty_line(self):
+        '''tests the output of a new line in the console'''
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("")
+        text = f.read()
+        self.assertEqual(text, "")
+
+    def test_help_commands(self):
+        '''test the output of help command'''
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("help create")
+        text = f.getvalue()
+
+        self.assertEqual(text, "create an instance of a class\n")
+
+        with patch('sys.stdout', new=StringIO()) as o:
+            HBNBCommand().onecmd("help quit")
+        text = o.getvalue()
+
+        self.assertEqual(text, "Quit command to exit the program\n\n")
+
+    def test_invalid_class(self):
+        '''test invalid class with a command'''
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create hellp")
+        text = f.getvalue()
+        self.assertEqual(text, "** class doesn't exist **\n")
+
+    def test_update(self):
+        m = models.base_model.BaseModel()
+        m.name = "someone"
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create hellp")
+        text = f.getvalue()
+        self.assertTrue(hasattr(m, 'name'))
+
+    def test_missing_id(self):
+        '''test a command that accepts id, without id'''
+
+        with patch('sys.stdout', new=StringIO()) as o:
+            HBNBCommand().onecmd("show User")
+        text = o.getvalue()
+
+        self.assertEqual(text, "** instance id missing **\n")
