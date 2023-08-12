@@ -49,9 +49,9 @@ class HBNBCommand(cmd.Cmd):
 {str(args[1]).strip()}"
                         elif len(args) == 3:
                             arg1, arg2, arg3 = args[0].strip(),\
-                            args[1].strip(), args[2].strip()
+                                    args[1].strip(), args[2].strip()
                             if len(arg1) >= 2:
-                                    arg1 = arg1[1:-1]
+                                arg1 = arg1[1:-1]
                             if len(arg2) >= 2:
                                 if arg2[0] == arg2[-1] == '"':
                                     arg2 = arg2[1:-1]
