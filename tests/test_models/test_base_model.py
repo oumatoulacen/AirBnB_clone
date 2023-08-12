@@ -20,6 +20,7 @@ class TestBaseModel(unittest.TestCase):
     def test_instances(self):
         """Tests instantiation of BaseModel class."""
         model1 = BaseModel()
-        self.assertEqual(str(type(model1)), "<class 'models.base_model.BaseModel'>")
+        self.assertEqual(str(type(model1)), "\
+<class 'models.base_model.BaseModel'>")
         self.assertIsInstance(model1, BaseModel)
         self.assertTrue(issubclass(type(model1), BaseModel))
