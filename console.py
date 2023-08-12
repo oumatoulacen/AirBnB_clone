@@ -105,7 +105,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, line):
         '''Prints the string representation of an instance based on
         the class name and id'''
-        if not line:
+        if not line or line == "":
             print("** class name missing **")
         else:
             class_name, class_id, line = super().parseline(line)
@@ -116,7 +116,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** instance id missing **")
             else:
                 try:
-                    print(storage.all()[f"{class_name}.{class_id}"])
+                    print(str(storage.all()[f"{class_name}.{class_id}"]))
                 except KeyError:
                     print("** no instance found **")
 
@@ -136,7 +136,6 @@ class HBNBCommand(cmd.Cmd):
                 try:
                     del storage.all()[f"{class_name}.{class_id}"]
                     storage.save()
-                    print(f"{class_name}.{class_id} deleted")
                 except KeyError:
                     print("** no instance found **")
 
