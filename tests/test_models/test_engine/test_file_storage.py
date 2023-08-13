@@ -2,12 +2,20 @@
 '''test the class BaseModel'''
 import unittest
 from models.base_model import BaseModel
+from models.city import City
+from models.state import State
+from models.review import Review
+from models.user import User
+from models.amenity import Amenity
+from models.place import Place
+
+from models.engine.file_storage import FileStorage
 import models
 import datetime
 '''modules'''
 
 
-class TestBaseModel(unittest.TestCase):
+class TestFileStorage(unittest.TestCase):
     """Test Cases for the BaseModel class."""
 
     def setUp(self):
@@ -18,29 +26,51 @@ class TestBaseModel(unittest.TestCase):
         """Tears down test methods."""
         pass
 
-    def test_to_dict(self):
-        '''test to_dect method of BaseModel'''
-        m = BaseModel()
-        m.save()
-        m.name = 'someone'
-        m.number = 90
-        d = m.to_dict()
-        self.assertTrue(type(d["id"]), str)
-        self.assertTrue(type(d["created_at"]), str)
-        self.assertTrue(type(d["updated_at"]), str)
-        self.assertTrue(type(d["name"]), str)
-        self.assertTrue(type(d["number"]), int)
+    def test_all(self):
+        '''test to_dect method of FileStorage'''
+        m = FileStorage()
+        m.reload()
+        dic = m.all()
+        self.assertTrue(dic, {})
 
-    def test_save(self):
+    def test_reload(self):
         ''' test BaseModel save method '''
-        m = BaseModel()
-        updated = m.updated_at
-        m.save()
-        self.assertNotEqual(updated, m.updated_at)
+        m = FileStorage()
+        base = BaseModel()
+        place = Place()
+        city = City()
+        review = Review()
+        state = State()
+        user = User()
+        amenity = Amenity()
 
-    def test_instance_from_dict(self):
+        m.new(base)
+        m.new(place)
+        m.new(city)
+        m.new(review)
+        m.new(state)
+        m.new(user)
+        m.new(amenity)
+        m.save()
+        m.reload()
+        self.assertIsInstance(m.all()[f"{base.__class__.__name__}.{base.id}\
+"], BaseModel)
+        self.assertIsInstance(m.all()[f"{place.__class__.__name__}.{place.id}\
+"], Place)
+        self.assertIsInstance(m.all()[f"{city.__class__.__name__}.{city.id}\
+"], City)
+        self.assertIsInstance(m.all()[f"{review.__class__.__name__}.\
+{review.id}"], Review)
+        self.assertIsInstance(m.all()[f"{state.__class__.__name__}.{state.id}\
+"], State)
+        self.assertIsInstance(m.all()[f"{user.__class__.__name__}.{user.id}\
+"], User)
+        self.assertIsInstance(m.all()[f"{amenity.__class__.__name__}.\
+{amenity.id}"], Amenity)
+
+    def test_new(self):
         dict_obj = {
-                '__class__': "BaseModel",
+                '__class__': "FileStorage",
                 "id": "10",
                 "created_at": "2022-01-01T10:01:25.123456",
                 "updated_at": "2022-01-01T10:01:25.123456",
@@ -48,51 +78,42 @@ class TestBaseModel(unittest.TestCase):
                 "number": 100,
                 }
         m = BaseModel(**dict_obj)
-        self.assertEqual(m.__class__.__name__, "BaseModel")
+        obj = FileStorage()
+        obj.new(m)
+        self.assertEqual(obj.__class__.__name__, "FileStorage")
         self.assertEqual(m.id, "10")
-        self.assertTrue(type(m.number), int)
+        self.assertEqual(obj.all()[f"{m.__class__.__name__}.{m.id}"], m)
         self.assertTrue(type(m.created_at), datetime.datetime)
         self.assertTrue(type(m.updated_at), datetime.datetime)
         self.assertEqual(m.name, "someone")
 
     def test_instances(self):
-        """Tests instantiation of BaseModel class."""
-        model1 = BaseModel()
+        """Tests instantiation of FileStorage class."""
+        model1 = FileStorage()
         self.assertEqual(str(type(model1)), "\
-<class 'models.base_model.BaseModel'>")
-        self.assertIsInstance(model1, BaseModel)
-        self.assertTrue(issubclass(type(model1), BaseModel))
+<class 'models.engine.file_storage.FileStorage'>")
+        self.assertIsInstance(model1, FileStorage)
+        self.assertTrue(issubclass(type(model1), FileStorage))
 
     def test_attributes(self):
-        '''tests attibutes of basemodel'''
+        '''tests attibutes of FileStorage'''
 
-        model1 = BaseModel()
-        model1.name = 'someone'
+        model1 = FileStorage()
         for key in model1.__dict__.keys():
             self.assertTrue(hasattr(model1, key))
 
     def test_docs(self):
         '''test docs of module and class'''
 
-        doc = '''base module module'''
-        self.assertEqual(models.base_model.__doc__, doc)
+        doc = '''a module to Store objects'''
+        self.assertEqual(models.engine.file_storage.__doc__, doc)
 
-        class_doc = '''the base class of all clases'''
-        self.assertEqual(BaseModel.__doc__, class_doc)
+        class_doc = '''a class that serializes instances to a JSON file
+and deserializes JSON file to instances'''
+        self.assertEqual(FileStorage.__doc__, class_doc)
 
     def test_types_of_attr(self):
-        '''test type of BaseModel attributes'''
+        '''test type of FileStorage attributes'''
 
-        m = BaseModel()
-        m.save()
-        self.assertTrue(type(m.id), str)
-        self.assertTrue(type(m.created_at), datetime.datetime)
-        self.assertTrue(type(m.updated_at), datetime.datetime)
-    def test_str(self):
-        '''test BaseModel sting representation'''
-
-        m = BaseModel()
-        m.id = "10"
-        string_m = "[BaseModel] (10)"
-        self.assertIn(string_m, str(m))
-
+        m = FileStorage()
+        self.assertTrue(type(m.all()), dict)
