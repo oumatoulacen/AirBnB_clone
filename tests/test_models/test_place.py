@@ -137,6 +137,7 @@ class TestPlace(unittest.TestCase):
         self.assertTrue(type(m.id), str)
         self.assertTrue(type(m.created_at), datetime.datetime)
         self.assertTrue(type(m.updated_at), datetime.datetime)
+
     def test_str(self):
         '''test Place sting representation'''
 
@@ -144,4 +145,3 @@ class TestPlace(unittest.TestCase):
         m.id = "10"
         string_m = "[Place] (10)"
         self.assertIn(string_m, str(m))
-

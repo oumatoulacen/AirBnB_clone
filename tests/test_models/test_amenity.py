@@ -100,4 +100,3 @@ class TestAmenity(unittest.TestCase):
         m.id = "10"
         string_m = "[Amenity] (10)"
         self.assertIn(string_m, str(m))
-

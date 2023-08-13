@@ -96,6 +96,7 @@ class TestCity(unittest.TestCase):
         self.assertTrue(type(m.updated_at), datetime.datetime)
         self.assertTrue(type(m.state_id), int)
         self.assertTrue(type(m.name), str)
+
     def test_str(self):
         '''test City sting representation'''
 
@@ -103,4 +104,3 @@ class TestCity(unittest.TestCase):
         m.id = "10"
         string_m = "[City] (10)"
         self.assertIn(string_m, str(m))
-

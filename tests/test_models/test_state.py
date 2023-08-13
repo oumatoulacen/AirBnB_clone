@@ -86,6 +86,7 @@ class TestState(unittest.TestCase):
         self.assertTrue(type(m.created_at), datetime.datetime)
         self.assertTrue(type(m.updated_at), datetime.datetime)
         self.assertTrue(type(m.name), str)
+
     def test_str(self):
         '''test State sting representation'''
 
@@ -93,4 +94,3 @@ class TestState(unittest.TestCase):
         m.id = "10"
         string_m = "[State] (10)"
         self.assertIn(string_m, str(m))
-

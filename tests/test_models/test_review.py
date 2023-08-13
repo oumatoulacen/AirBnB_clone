@@ -110,4 +110,3 @@ class TestBaseModel(unittest.TestCase):
         m.id = "10"
         string_m = "[Review] (10)"
         self.assertIn(string_m, str(m))
-

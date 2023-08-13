@@ -101,6 +101,7 @@ class TestUser(unittest.TestCase):
         self.assertTrue(type(m.first_name), str)
         self.assertTrue(type(m.last_name), str)
         self.assertTrue(type(m.email), str)
+
     def test_str(self):
         '''test User sting representation'''
 
@@ -108,4 +109,3 @@ class TestUser(unittest.TestCase):
         m.id = "10"
         string_m = "[User] (10)"
         self.assertIn(string_m, str(m))
-
