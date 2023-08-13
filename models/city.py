@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 '''city class module'''
 
-from models import storage
 from models.base_model import BaseModel
 '''modules to use'''
 
