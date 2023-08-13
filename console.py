@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''comsole module contains the entry point of the command interpreter'''
+'''console module contains the entry point of the command interpreter'''
 
 from models.engine.file_storage import FileStorage
 from models import storage

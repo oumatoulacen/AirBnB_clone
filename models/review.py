@@ -7,7 +7,7 @@ from models.base_model import BaseModel
 
 
 class Review(BaseModel):
-    '''rewview class'''
+    '''review class'''
 
     place_id = ""
     user_id = ""
