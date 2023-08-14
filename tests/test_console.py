@@ -8,8 +8,22 @@ from unittest.mock import patch
 from io import StringIO
 from models import storage
 import models
+from models.base_model import BaseModel
+from models.place import Place
+from models.city import City
+from models.state import State
+from models.user import User
+from models.review import Review
+from models.amenity import Amenity
 
-
+classes = {
+        "BaseModel": BaseModel,
+        "Place": Place,
+        "City": City,
+        "State": State,
+        "User": User,
+        "Review": Review,
+        "Amenity": Amenity}
 class TestConsole(unittest.TestCase):
     """ console test cases"""
 
@@ -67,3 +81,18 @@ entry point of the command interpreter''')
         text = o.getvalue()
 
         self.assertEqual(text, "** instance id missing **\n")
+
+    def test_all(self):
+        m = models.base_model.BaseModel()
+        m.name = "someone"
+        m.id = "10"
+        m.created_at = "2017-06-14T22:31:03.285259"
+        m.updated_at = "2017-06-14T22:31:03.285259"
+
+        for cls in classes.keys():
+            with patch('sys.stdout', new=StringIO()) as f:
+                line = HBNBCommand().precmd(f"{cls}.all()")
+                HBNBCommand().onecmd(line)
+            text = f.getvalue()
+            self.assertIn(f"[{cls}]", text)
+
