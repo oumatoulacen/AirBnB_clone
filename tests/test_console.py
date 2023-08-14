@@ -7,7 +7,7 @@ import console
 from unittest.mock import patch
 from io import StringIO
 from models import storage
-import models
+import models, os
 from models.base_model import BaseModel
 from models.place import Place
 from models.city import City
@@ -96,11 +96,16 @@ entry point of the command interpreter''')
             text = f.getvalue()
             self.assertIn(f"[{cls}]", text)
     def test_all(self):
-        for cls in classes.keys():
-            m = classes[cls]()
+        for c in classes.keys():
+            m = classes[c]()
             m.save()
             with patch('sys.stdout', new=StringIO()) as f:
-                line = HBNBCommand().precmd(f"{cls}.count()")
+                line = HBNBCommand().precmd(f"{c}.count()")
                 HBNBCommand().onecmd(line)
             text = f.getvalue()
-            self.assertEqual("1n", text)
+            self.assertEqual("1\n", text)
+            with patch('sys.stdout', new=StringIO()) as d:
+                line = HBNBCommand().precmd("{}.destroy({})".format(c, m.id))
+                HBNBCommand().onecmd(line)
+            txt = d.getvalue()
+            self.assertEqual("", txt)
