@@ -98,8 +98,9 @@ entry point of the command interpreter''')
     def test_all(self):
         for cls in classes.keys():
             m = classes[cls]()
+            m.save()
             with patch('sys.stdout', new=StringIO()) as f:
                 line = HBNBCommand().precmd(f"{cls}.count()")
                 HBNBCommand().onecmd(line)
             text = f.getvalue()
-            self.assertEqual(1, text)
+            self.assertEqual("1n", text)
