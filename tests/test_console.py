@@ -95,4 +95,11 @@ entry point of the command interpreter''')
                 HBNBCommand().onecmd(line)
             text = f.getvalue()
             self.assertIn(f"[{cls}]", text)
-
+    def test_all(self):
+        for cls in classes.keys():
+            m = classes[cls]()
+            with patch('sys.stdout', new=StringIO()) as f:
+                line = HBNBCommand().precmd(f"{cls}.count()")
+                HBNBCommand().onecmd(line)
+            text = f.getvalue()
+            self.assertEqual(1, text)
