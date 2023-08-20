@@ -58,7 +58,7 @@ class HBNBCommand(cmd.Cmd):
                                 else:
                                     arg2 = ""
                             line = f"update {str(name)} {arg1} {arg2} {arg3}"
-        return line
+            return line
 
     def do_count(self, name):
         ''' retrieve the number of instances of a class'''

@@ -1,9 +1,13 @@
 #!/usr/bin/python3
 '''only tests'''
 
-from models.base_model import BaseModel
+
+import shlex
 
 
-m = BaseModel()
+input_string = '"name": "John", "age": 89'
 
-print(type(m.id) == str)
+tokens = input_string.split(",")[0].split(":")
+print(tokens)
+
+
