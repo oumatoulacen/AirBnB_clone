@@ -91,7 +91,7 @@
 
 /* media query */
 
-@media screen and (max-width: 530px){
+@media screen and (max-width: 680px){
     .filters {
         background-color: white;
         height: 70px;

@@ -178,7 +178,7 @@ article h2 {
 
 /*media query*/
 
-@media screen and (max-width: 530px){
+@media screen and (max-width: 680px){
     .places {
         margin: 70px auto 30px;
     }

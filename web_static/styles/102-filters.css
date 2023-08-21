@@ -7,10 +7,10 @@
     border: 1px solid #DDDDDD;
     border-radius: 4px;
     align-items: center;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
+    -webkit-border-radius:;
+    -moz-border-radius:;
+    -ms-border-radius:;
+    -o-border-radius:;
 }
 .filters button {
     font-size: 18px;
@@ -90,7 +90,7 @@
 
 /* media query */
 
-@media screen and (max-width: 530px){
+@media screen and (max-width: 680px){
     .filters {
         background-color: white;
         height: 70px;
