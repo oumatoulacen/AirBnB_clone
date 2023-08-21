@@ -12,6 +12,7 @@
     -ms-border-radius: 4px;
     -o-border-radius: 4px;
 }
+
 .filters button {
     font-size: 18px;
     background-color: #FF5A5F;
@@ -31,7 +32,7 @@
     opacity: 0.9;
 }
 
-.group{
+.group {
     width: calc((1000px + 1px) / 2);
     height: 70px;
     display: flex;
@@ -39,7 +40,7 @@
     text-align: start;
 }
 
-.group div{
+.group div {
     width: calc((1000px + 1px) / 4);
     line-height: 0.5;
 }
@@ -55,22 +56,22 @@
 }
 
 .popover1 ul,
-.popover2 ul{
+.popover2 ul {
     list-style: none;
     line-height: 1.4;
 }
 
 .popover1 h2,
-.popover2 h2{
+.popover2 h2 {
     padding: 0 20px;
 }
-.group h3{
+.group h3 {
     font-weight: 600;
     padding: 0px 40px;
 
 }
 
-.group h4{
+.group h4 {
     font-weight: 400;
     font-size: 14px;
     padding: 0px 40px;
@@ -144,6 +145,7 @@
         -ms-border-radius: 4px;
         -o-border-radius: 4px;
     }
+
     .filters button {
         font-size: 18px;
         background-color: #FF5A5F;
@@ -159,6 +161,7 @@
         -ms-border-radius: 4px;
         -o-border-radius: 4px;
     }
+
     .group{
         width: calc((1000px + 1px) / 2);
         height: 70px;
@@ -166,7 +169,7 @@
         text-align: start;
     }
     
-    .group div{
+    .group div {
         width: calc((1000px + 1px) / 4);
         line-height: 0.5;
     }
